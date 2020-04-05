@@ -4,6 +4,7 @@ import com.mashape.unirest.http.HttpResponse;
 import com.mashape.unirest.http.JsonNode;
 
 import java.util.List;
+import java.util.Objects;
 
 public class Planet  {
     private String name;
@@ -138,5 +139,54 @@ public class Planet  {
     public void setResponse(HttpResponse<JsonNode> response) {
         this.response = response;
     }
+
+    @Override
+    public String toString() {
+        return "Planet{" +
+                "name='" + name + '\'' +
+                ", rotation_period='" + rotation_period + '\'' +
+                ", orbital_period='" + orbital_period + '\'' +
+                ", diameter='" + diameter + '\'' +
+                ", gravity='" + gravity + '\'' +
+                ", terrarian='" + terrarian + '\'' +
+                ", surface_water='" + surface_water + '\'' +
+                ", population='" + population + '\'' +
+                ", residents=" + residents +
+                ", films=" + films +
+                ", created='" + created + '\'' +
+                ", edited='" + edited + '\'' +
+                ", url='" + url + '\'' +
+                ", response=" + response +
+                ", results=" + results +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Planet planet = (Planet) o;
+        return Objects.equals(name, planet.name) &&
+                Objects.equals(rotation_period, planet.rotation_period) &&
+                Objects.equals(orbital_period, planet.orbital_period) &&
+                Objects.equals(diameter, planet.diameter) &&
+                Objects.equals(gravity, planet.gravity) &&
+                Objects.equals(terrarian, planet.terrarian) &&
+                Objects.equals(surface_water, planet.surface_water) &&
+                Objects.equals(population, planet.population) &&
+                Objects.equals(residents, planet.residents) &&
+                Objects.equals(films, planet.films) &&
+                Objects.equals(created, planet.created) &&
+                Objects.equals(edited, planet.edited) &&
+                Objects.equals(url, planet.url) &&
+                Objects.equals(response, planet.response) &&
+                Objects.equals(results, planet.results);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, rotation_period, orbital_period, diameter, gravity, terrarian, surface_water, population, residents, films, created, edited, url, response, results);
+    }
+
 }
 

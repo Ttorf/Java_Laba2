@@ -4,6 +4,7 @@ import com.mashape.unirest.http.HttpResponse;
 import com.mashape.unirest.http.JsonNode;
 
 import java.util.List;
+import java.util.Objects;
 
 public class Species  {
     private String name;
@@ -155,5 +156,57 @@ public class Species  {
 
     public void setResponse(HttpResponse<JsonNode> response) {
         this.response = response;
+    }
+
+    @Override
+    public String toString() {
+        return "Species{" +
+                "name='" + name + '\'' +
+                ", classification='" + classification + '\'' +
+                ", designation='" + designation + '\'' +
+                ", naverage_heightame='" + naverage_heightame + '\'' +
+                ", skin_colors='" + skin_colors + '\'' +
+                ", hair_colors='" + hair_colors + '\'' +
+                ", eye_colors='" + eye_colors + '\'' +
+                ", skin_average_lifespancolors='" + skin_average_lifespancolors + '\'' +
+                ", homeworld='" + homeworld + '\'' +
+                ", language='" + language + '\'' +
+                ", people=" + people +
+                ", films=" + films +
+                ", created='" + created + '\'' +
+                ", edited='" + edited + '\'' +
+                ", url='" + url + '\'' +
+                ", response=" + response +
+                ", results=" + results +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Species species = (Species) o;
+        return Objects.equals(name, species.name) &&
+                Objects.equals(classification, species.classification) &&
+                Objects.equals(designation, species.designation) &&
+                Objects.equals(naverage_heightame, species.naverage_heightame) &&
+                Objects.equals(skin_colors, species.skin_colors) &&
+                Objects.equals(hair_colors, species.hair_colors) &&
+                Objects.equals(eye_colors, species.eye_colors) &&
+                Objects.equals(skin_average_lifespancolors, species.skin_average_lifespancolors) &&
+                Objects.equals(homeworld, species.homeworld) &&
+                Objects.equals(language, species.language) &&
+                Objects.equals(people, species.people) &&
+                Objects.equals(films, species.films) &&
+                Objects.equals(created, species.created) &&
+                Objects.equals(edited, species.edited) &&
+                Objects.equals(url, species.url) &&
+                Objects.equals(response, species.response) &&
+                Objects.equals(results, species.results);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, classification, designation, naverage_heightame, skin_colors, hair_colors, eye_colors, skin_average_lifespancolors, homeworld, language, people, films, created, edited, url, response, results);
     }
 }

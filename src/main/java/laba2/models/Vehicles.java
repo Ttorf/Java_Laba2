@@ -4,6 +4,7 @@ import com.mashape.unirest.http.HttpResponse;
 import com.mashape.unirest.http.JsonNode;
 
 import java.util.List;
+import java.util.Objects;
 
 public class Vehicles  {
     private String name;
@@ -164,5 +165,59 @@ public class Vehicles  {
 
     public void setResponse(HttpResponse<JsonNode> response) {
         this.response = response;
+    }
+
+    @Override
+    public String toString() {
+        return "Vehicles{" +
+                "name='" + name + '\'' +
+                ", model='" + model + '\'' +
+                ", manufacturer='" + manufacturer + '\'' +
+                ", cost_in_credits='" + cost_in_credits + '\'' +
+                ", length='" + length + '\'' +
+                ", max_atmosphering_speed='" + max_atmosphering_speed + '\'' +
+                ", crew='" + crew + '\'' +
+                ", passengers='" + passengers + '\'' +
+                ", cargo_capacity='" + cargo_capacity + '\'' +
+                ", consumables='" + consumables + '\'' +
+                ", vehicle_class='" + vehicle_class + '\'' +
+                ", pilots=" + pilots +
+                ", films=" + films +
+                ", created='" + created + '\'' +
+                ", edited='" + edited + '\'' +
+                ", url='" + url + '\'' +
+                ", response=" + response +
+                ", results=" + results +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Vehicles vehicles = (Vehicles) o;
+        return Objects.equals(name, vehicles.name) &&
+                Objects.equals(model, vehicles.model) &&
+                Objects.equals(manufacturer, vehicles.manufacturer) &&
+                Objects.equals(cost_in_credits, vehicles.cost_in_credits) &&
+                Objects.equals(length, vehicles.length) &&
+                Objects.equals(max_atmosphering_speed, vehicles.max_atmosphering_speed) &&
+                Objects.equals(crew, vehicles.crew) &&
+                Objects.equals(passengers, vehicles.passengers) &&
+                Objects.equals(cargo_capacity, vehicles.cargo_capacity) &&
+                Objects.equals(consumables, vehicles.consumables) &&
+                Objects.equals(vehicle_class, vehicles.vehicle_class) &&
+                Objects.equals(pilots, vehicles.pilots) &&
+                Objects.equals(films, vehicles.films) &&
+                Objects.equals(created, vehicles.created) &&
+                Objects.equals(edited, vehicles.edited) &&
+                Objects.equals(url, vehicles.url) &&
+                Objects.equals(response, vehicles.response) &&
+                Objects.equals(results, vehicles.results);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, model, manufacturer, cost_in_credits, length, max_atmosphering_speed, crew, passengers, cargo_capacity, consumables, vehicle_class, pilots, films, created, edited, url, response, results);
     }
 }

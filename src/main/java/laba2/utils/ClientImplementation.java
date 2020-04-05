@@ -1,9 +1,19 @@
 package laba2.utils;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+import com.google.gson.reflect.TypeToken;
+import com.mashape.unirest.http.HttpResponse;
+import com.mashape.unirest.http.JsonNode;
+import com.mashape.unirest.http.Unirest;
 import com.mashape.unirest.http.exceptions.UnirestException;
 import laba2.models.*;
 
+import java.lang.reflect.Type;
+import java.util.ArrayDeque;
+import java.util.ArrayList;
 import java.util.List;
 
 public class ClientImplementation<T> implements Client {
@@ -190,7 +200,38 @@ public class ClientImplementation<T> implements Client {
     }
 
     public T getByUrl(String url, Object type) throws UnirestException {
-        return null;
+        People people = new People();
+        Films films = new Films();
+        Planet planet = new Planet();
+        Species species = new Species();
+        Starship starship = new Starship();
+        Vehicles vehicles = new Vehicles();
+        if (type.getClass().equals(people.getClass())) {
+            String json = workWithSite.JsonToString(people, url);
+            return (T) (this.people = gson.fromJson(json, People.class));
+
+        } else if (type.getClass().equals(films.getClass())) {
+            String json = workWithSite.JsonToString(films, url);
+            return (T) (this.films = gson.fromJson(json, Films.class));
+        } else if (type.getClass().equals(planet.getClass())) {
+            json = workWithSite.JsonToString(planet, url);
+            return (T) (this.planet = gson.fromJson(json, Planet.class));
+
+        } else if (type.getClass().equals(species.getClass())) {
+            json = workWithSite.JsonToString(species, url);
+            return (T) (this.species = gson.fromJson(json, Species.class));
+
+        } else if (type.getClass().equals(starship.getClass())) {
+            json = workWithSite.JsonToString(starship, url);
+            return (T) (this.starship = gson.fromJson(json, Starship.class));
+
+        } else if (type.getClass().equals(vehicles.getClass())) {
+            json = workWithSite.JsonToString(vehicles, url);
+            return (T) (this.vehicles = gson.fromJson(json, Vehicles.class));
+
+        } else {
+            return null;
+        }
     }
 
     public List<T> getAllPage(String url, Object type) throws UnirestException {
@@ -200,8 +241,7 @@ public class ClientImplementation<T> implements Client {
         Species species = new Species();
         Starship starship = new Starship();
         Vehicles vehicles = new Vehicles();
-        if (type.getClass() == people.getClass()) {
-
+        if (type.getClass().equals(people.getClass())) {
             String json = workWithSite.JsonToString(people, url);
             this.people = gson.fromJson(json, People.class);
             return (List<T>) this.people.getResults();
@@ -230,9 +270,16 @@ public class ClientImplementation<T> implements Client {
         }
     }
 
-    public T getOnePage(String jsonStr, Object type) {
+    public T getOnePage(String jsonStr, Object type) throws UnirestException {
+        people = new People();
+        gson = new Gson();
+        People people2 = gson.fromJson(jsonStr, People.class);
+        List<People> listPeople = (List<People>) getAllPage(people.getUrl(), people);
+        for (People peopleTemp : listPeople) {
+            if (peopleTemp.equals(people2))
+                return (T) peopleTemp;
+        }
         return null;
     }
-
-
 }
+

@@ -4,6 +4,7 @@ import com.mashape.unirest.http.HttpResponse;
 import com.mashape.unirest.http.JsonNode;
 
 import java.util.List;
+import java.util.Objects;
 
 public class Films {
     private String title;
@@ -159,5 +160,32 @@ public class Films {
                 ", url='" + url + '\'' +
                 ", response=" + response +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Films films = (Films) o;
+        return episode_id == films.episode_id &&
+                Objects.equals(title, films.title) &&
+                Objects.equals(opening_crawl, films.opening_crawl) &&
+                Objects.equals(director, films.director) &&
+                Objects.equals(producer, films.producer) &&
+                Objects.equals(characters, films.characters) &&
+                Objects.equals(planets, films.planets) &&
+                Objects.equals(starships, films.starships) &&
+                Objects.equals(vehicles, films.vehicles) &&
+                Objects.equals(species, films.species) &&
+                Objects.equals(results, films.results) &&
+                Objects.equals(created, films.created) &&
+                Objects.equals(edited, films.edited) &&
+                Objects.equals(url, films.url) &&
+                Objects.equals(response, films.response);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(title, episode_id, opening_crawl, director, producer, characters, planets, starships, vehicles, species, results, created, edited, url, response);
     }
 }

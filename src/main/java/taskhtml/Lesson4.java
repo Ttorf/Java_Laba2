@@ -147,8 +147,7 @@ public class Lesson4 {
 
         item = gson.fromJson(json, Lesson4.class);
         String name2 = item.getSkinCollor();
-
-        System.out.println(name2);
+        System.out.println(Json());
 
     }
 

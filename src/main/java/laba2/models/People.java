@@ -4,8 +4,9 @@ import com.mashape.unirest.http.HttpResponse;
 import com.mashape.unirest.http.JsonNode;
 
 import java.util.List;
+import java.util.Objects;
 
-public class People  {
+public class People {
     private String name;
     private String height;
     private String mass;
@@ -22,7 +23,7 @@ public class People  {
     private List<People> results;
     private String created;
     private String edited;
-    private String url = "https://swapi.co/api/people/";;
+    private String url = "https://swapi.co/api/people/";
     private HttpResponse<JsonNode> response;
 
     public String getName() {
@@ -165,5 +166,59 @@ public class People  {
 
     public void setResponse(HttpResponse<JsonNode> response) {
         this.response = response;
+    }
+
+    @Override
+    public String toString() {
+        return "People{" +
+                "name='" + name + '\'' +
+                ", height='" + height + '\'' +
+                ", mass='" + mass + '\'' +
+                ", hair_color='" + hair_color + '\'' +
+                ", skin_color='" + skin_color + '\'' +
+                ", eye_color='" + eye_color + '\'' +
+                ", birth_year='" + birth_year + '\'' +
+                ", gender='" + gender + '\'' +
+                ", homeworld='" + homeworld + '\'' +
+                ", films=" + films +
+                ", species=" + species +
+                ", vehicles=" + vehicles +
+                ", starships=" + starships +
+                ", results=" + results +
+                ", created='" + created + '\'' +
+                ", edited='" + edited + '\'' +
+                ", url='" + url + '\'' +
+                ", response=" + response +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        People people = (People) o;
+        return Objects.equals(name, people.name) &&
+                Objects.equals(height, people.height) &&
+                Objects.equals(mass, people.mass) &&
+                Objects.equals(hair_color, people.hair_color) &&
+                Objects.equals(skin_color, people.skin_color) &&
+                Objects.equals(eye_color, people.eye_color) &&
+                Objects.equals(birth_year, people.birth_year) &&
+                Objects.equals(gender, people.gender) &&
+                Objects.equals(homeworld, people.homeworld) &&
+                Objects.equals(films, people.films) &&
+                Objects.equals(species, people.species) &&
+                Objects.equals(vehicles, people.vehicles) &&
+                Objects.equals(starships, people.starships) &&
+                Objects.equals(results, people.results) &&
+                Objects.equals(created, people.created) &&
+                Objects.equals(edited, people.edited) &&
+                Objects.equals(url, people.url) &&
+                Objects.equals(response, people.response);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, height, mass, hair_color, skin_color, eye_color, birth_year, gender, homeworld, films, species, vehicles, starships, results, created, edited, url, response);
     }
 }
