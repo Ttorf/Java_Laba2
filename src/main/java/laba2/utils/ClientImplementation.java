@@ -27,7 +27,7 @@ public class ClientImplementation<T> implements Client {
                 return per;
             }
         }
-        return null;
+        throw new NullPointerException("Имя не найдено");
 
     }
 
@@ -38,7 +38,7 @@ public class ClientImplementation<T> implements Client {
         people = gson.fromJson(json, People.class);
         if (!people.getResults().isEmpty()) {
             return people.getResults().get(id);
-        } else return null;
+        } else throw new NullPointerException("Человек не найден");
     }
 
     @Override
@@ -46,7 +46,6 @@ public class ClientImplementation<T> implements Client {
         json = workWithSite.JsonToString(people);
         people = gson.fromJson(json, People.class);
         return people.getResults();
-//        return  getAllPage(people.getUrl(),people);
     }
 
     @Override
@@ -58,7 +57,7 @@ public class ClientImplementation<T> implements Client {
                 return planet;
             }
         }
-        return null;
+        throw new NullPointerException("Планета не найдена");
     }
 
     @Override
@@ -67,7 +66,7 @@ public class ClientImplementation<T> implements Client {
         planet = gson.fromJson(json, Planet.class);
         if (!planet.getResults().isEmpty()) {
             return planet.getResults().get(id);
-        } else return null;
+        } else throw new NullPointerException("Планета не найдена");
     }
 
     @Override
@@ -86,7 +85,7 @@ public class ClientImplementation<T> implements Client {
                 return films;
             }
         }
-        return null;
+        throw new NullPointerException("Фильм не найден");
     }
 
     //episode id
@@ -96,7 +95,7 @@ public class ClientImplementation<T> implements Client {
         films = gson.fromJson(json, Films.class);
         if (!films.getResults().isEmpty()) {
             return films.getResults().get(id);
-        } else return null;
+        } else throw new NullPointerException("Фильм не найден");
     }
 
     @Override
@@ -115,7 +114,7 @@ public class ClientImplementation<T> implements Client {
                 return species;
             }
         }
-        return null;
+        throw new NullPointerException("Разновидность не найдена");
     }
 
     @Override
@@ -124,7 +123,7 @@ public class ClientImplementation<T> implements Client {
         species = gson.fromJson(json, Species.class);
         if (!species.getResults().isEmpty()) {
             return species.getResults().get(id);
-        } else return null;
+        } else throw new NullPointerException("Разновидность не найдена");
     }
 
     @Override
@@ -143,7 +142,7 @@ public class ClientImplementation<T> implements Client {
                 return vehicles;
             }
         }
-        return null;
+        throw new NullPointerException("Техника не найдена");
     }
 
     @Override
@@ -152,7 +151,7 @@ public class ClientImplementation<T> implements Client {
         vehicles = gson.fromJson(json, Vehicles.class);
         if (!vehicles.getResults().isEmpty()) {
             return vehicles.getResults().get(id);
-        } else return null;
+        } else throw new NullPointerException("Техника не найдена");
     }
 
     @Override
@@ -171,7 +170,7 @@ public class ClientImplementation<T> implements Client {
                 return starship;
             }
         }
-        return null;
+        throw new NullPointerException("Корабль не найден");
     }
 
     @Override
@@ -222,7 +221,7 @@ public class ClientImplementation<T> implements Client {
             return (T) (this.vehicles = gson.fromJson(json, Vehicles.class));
 
         } else {
-            return null;
+            throw new NullPointerException("Url не найден");
         }
     }
 
@@ -259,7 +258,8 @@ public class ClientImplementation<T> implements Client {
             this.vehicles = gson.fromJson(json, Vehicles.class);
             return (List<T>) this.vehicles.getResults();
         } else {
-            return null;
+            throw new NullPointerException("Страницы не найдены");
+
         }
     }
 
@@ -323,6 +323,6 @@ public class ClientImplementation<T> implements Client {
                     return (T) vehiclesTemp;
             }
         }
-      throw new NullPointerException("Json не найден");
+        throw new NullPointerException("Json не найден");
     }
 }
