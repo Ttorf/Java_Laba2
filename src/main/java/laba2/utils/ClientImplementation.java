@@ -8,12 +8,12 @@ import laba2.models.*;
 import java.util.List;
 
 public class ClientImplementation<T> implements Client {
-    People people;
-    Films films;
-    Planet planet;
-    Species species;
-    Starship starship;
-    Vehicles vehicles;
+    People people = new People();
+    Films films = new Films();
+    Planet planet = new Planet();
+    Species species = new Species();
+    Starship starship = new Starship();
+    Vehicles vehicles = new Vehicles();
     WorkWithSite workWithSite = new WorkWithSite();
     Gson gson = new Gson();
     String json;
@@ -88,14 +88,16 @@ public class ClientImplementation<T> implements Client {
         throw new NullPointerException("Фильм не найден");
     }
 
-    //episode id
+
     @Override
     public Films getFilmByID(int id) throws UnirestException {
-        json = workWithSite.JsonToString(films);
-        films = gson.fromJson(json, Films.class);
-        if (!films.getResults().isEmpty()) {
-            return films.getResults().get(id);
-        } else throw new NullPointerException("Фильм не найден");
+        List<Films> filmsList = (List<Films>) getAllPage(films.getUrl(), films);
+        if (!filmsList.isEmpty())
+            for (Films filmTemp : filmsList) {
+                if (filmTemp.getEpisode_id() == id)
+                    return filmTemp;
+            }
+        throw new NullPointerException("Фильм не найден");
     }
 
     @Override
@@ -109,9 +111,9 @@ public class ClientImplementation<T> implements Client {
     public Species getSpeciesByName(String name) throws UnirestException {
         json = workWithSite.JsonToString(species);
         species = gson.fromJson(json, Species.class);
-        for (Species species : species.getResults()) {
-            if (species.getName().equals(name)) {
-                return species;
+        for (Species speciestemp : species.getResults()) {
+            if (speciestemp.getName().equals(name)) {
+                return speciestemp;
             }
         }
         throw new NullPointerException("Разновидность не найдена");
@@ -190,12 +192,7 @@ public class ClientImplementation<T> implements Client {
     }
 
     public T getByUrl(String url, Object type) throws UnirestException {
-        People people = new People();
-        Films films = new Films();
-        Planet planet = new Planet();
-        Species species = new Species();
-        Starship starship = new Starship();
-        Vehicles vehicles = new Vehicles();
+
 
         if (type.getClass().equals(people.getClass())) {
             String json = workWithSite.JsonToString(people, url);
@@ -226,12 +223,7 @@ public class ClientImplementation<T> implements Client {
     }
 
     public List<T> getAllPage(String url, Object type) throws UnirestException {
-        People people = new People();
-        Films films = new Films();
-        Planet planet = new Planet();
-        Species species = new Species();
-        Starship starship = new Starship();
-        Vehicles vehicles = new Vehicles();
+
 
         if (type.getClass().equals(people.getClass())) {
             String json = workWithSite.JsonToString(people, url);
@@ -264,12 +256,6 @@ public class ClientImplementation<T> implements Client {
     }
 
     public T getOnePage(String jsonStr, Object type) throws UnirestException {
-        People people = new People();
-        Films films = new Films();
-        Planet planet = new Planet();
-        Species species = new Species();
-        Starship starship = new Starship();
-        Vehicles vehicles = new Vehicles();
         if (type.getClass().equals(people.getClass())) {
             people = new People();
             People people2 = gson.fromJson(jsonStr, People.class);
