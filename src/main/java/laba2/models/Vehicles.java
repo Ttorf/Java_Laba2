@@ -21,7 +21,7 @@ public class Vehicles  {
     private List<String> films;
     private String created;
     private String edited;
-    private String url ="http://swapi.co/api/people/";
+    private String url ="https://swapi.co/api/vehicles/";
     private HttpResponse<JsonNode> response;
     private List<Vehicles> results;
 

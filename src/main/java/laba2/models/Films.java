@@ -19,7 +19,7 @@ public class Films {
     private List<Films> results;
     private String created;
     private String edited;
-    private String url = "http://swapi.co/api/films/";
+    private String url = "https://swapi.co/api/films/";
     private HttpResponse<JsonNode> response;
 
     public List<Films> getResults() {

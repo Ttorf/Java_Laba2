@@ -22,7 +22,7 @@ public class Starship {
     private List<String> films;
     private String created;
     private String edited;
-    private String url = "http://swapi.co/api/starhips/";
+    private String url = "https://swapi.co/api/starships/";
     private HttpResponse<JsonNode> response;
     private List<Starship> results;
 

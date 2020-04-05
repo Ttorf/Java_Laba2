@@ -45,6 +45,7 @@ public class ClientImplementation<T> implements Client {
         json = workWithSite.JsonToString(people);
         people = gson.fromJson(json, People.class);
         return people.getResults();
+//        return  getAllPage(people.getUrl(),people);
     }
 
     @Override
@@ -86,7 +87,8 @@ public class ClientImplementation<T> implements Client {
         }
         return null;
     }
-//episode id
+
+    //episode id
     @Override
     public Films getFilmByID(int id) throws UnirestException {
         json = workWithSite.JsonToString(films);
@@ -187,12 +189,10 @@ public class ClientImplementation<T> implements Client {
         return starship.getResults();
     }
 
-    @Override
-    public List<T> getByUrl(String url, Object type) throws UnirestException {
-return null;
+    public T getByUrl(String url, Object type) throws UnirestException {
+        return null;
     }
 
-    @Override
     public List<T> getAllPage(String url, Object type) throws UnirestException {
         People people = new People();
         Films films = new Films();
@@ -230,8 +230,7 @@ return null;
         }
     }
 
-    @Override
-    public Object getOnePage(String jsonStr, Object type) {
+    public T getOnePage(String jsonStr, Object type) {
         return null;
     }
 

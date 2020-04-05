@@ -20,7 +20,7 @@ public class Species  {
     private List<String> films;
     private String created;
     private String edited;
-    private String url = "http://swapi.co/api/species/";;
+    private String url = "https://swapi.co/api/species/";;
     private HttpResponse<JsonNode> response;
     private List<Species> results;
 

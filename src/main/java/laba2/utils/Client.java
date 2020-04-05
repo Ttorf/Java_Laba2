@@ -40,10 +40,5 @@ public interface Client<T> {
 
     T getAllStarships() throws UnirestException;
 
-     T getByUrl(String url, T type) throws UnirestException;
-
-    T getAllPage(String url, T type) throws UnirestException;
-
-    T getOnePage(String jsonStr, T type);
 
 }

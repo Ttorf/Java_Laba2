@@ -22,7 +22,7 @@ public class People  {
     private List<People> results;
     private String created;
     private String edited;
-    private String url = "http://swapi.co/api/people/";;
+    private String url = "https://swapi.co/api/people/";;
     private HttpResponse<JsonNode> response;
 
     public String getName() {

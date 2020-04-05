@@ -18,7 +18,7 @@ public class Planet  {
     private List<String> films;
     private String created;
     private String edited;
-    private String url ="http://swapi.co/api/planets/";
+    private String url ="https://swapi.co/api/planets/";
     private HttpResponse<JsonNode> response;
     private List<Planet> results;
 
