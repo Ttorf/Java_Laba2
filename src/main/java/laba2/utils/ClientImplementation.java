@@ -1,19 +1,10 @@
 package laba2.utils;
 
 import com.google.gson.Gson;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
-import com.google.gson.reflect.TypeToken;
-import com.mashape.unirest.http.HttpResponse;
-import com.mashape.unirest.http.JsonNode;
-import com.mashape.unirest.http.Unirest;
 import com.mashape.unirest.http.exceptions.UnirestException;
 import laba2.models.*;
 
-import java.lang.reflect.Type;
-import java.util.ArrayDeque;
-import java.util.ArrayList;
+
 import java.util.List;
 
 public class ClientImplementation<T> implements Client {
@@ -206,6 +197,7 @@ public class ClientImplementation<T> implements Client {
         Species species = new Species();
         Starship starship = new Starship();
         Vehicles vehicles = new Vehicles();
+
         if (type.getClass().equals(people.getClass())) {
             String json = workWithSite.JsonToString(people, url);
             return (T) (this.people = gson.fromJson(json, People.class));
@@ -241,11 +233,12 @@ public class ClientImplementation<T> implements Client {
         Species species = new Species();
         Starship starship = new Starship();
         Vehicles vehicles = new Vehicles();
+
         if (type.getClass().equals(people.getClass())) {
             String json = workWithSite.JsonToString(people, url);
             this.people = gson.fromJson(json, People.class);
             return (List<T>) this.people.getResults();
-        } else if (type.getClass() == films.getClass()) {
+        } else if (type.getClass().equals(films.getClass())) {
             String json = workWithSite.JsonToString(films, url);
             this.films = gson.fromJson(json, Films.class);
             return (List<T>) this.films.getResults();
@@ -271,15 +264,65 @@ public class ClientImplementation<T> implements Client {
     }
 
     public T getOnePage(String jsonStr, Object type) throws UnirestException {
-        people = new People();
-        gson = new Gson();
-        People people2 = gson.fromJson(jsonStr, People.class);
-        List<People> listPeople = (List<People>) getAllPage(people.getUrl(), people);
-        for (People peopleTemp : listPeople) {
-            if (peopleTemp.equals(people2))
-                return (T) peopleTemp;
+        People people = new People();
+        Films films = new Films();
+        Planet planet = new Planet();
+        Species species = new Species();
+        Starship starship = new Starship();
+        Vehicles vehicles = new Vehicles();
+        if (type.getClass().equals(people.getClass())) {
+            people = new People();
+            People people2 = gson.fromJson(jsonStr, People.class);
+            List<People> listPeople = (List<People>) getAllPage(people.getUrl(), people);
+            for (People peopleTemp : listPeople) {
+                if (peopleTemp.equals(people2))
+                    return (T) peopleTemp;
+            }
+        } else if (type.getClass().equals(films.getClass())) {
+            films = new Films();
+            Films films2 = gson.fromJson(jsonStr, Films.class);
+            List<Films> listFilms = (List<Films>) getAllPage(films.getUrl(), films);
+            for (Films filmsTemp : listFilms) {
+                if (filmsTemp.equals(films2))
+                    return (T) filmsTemp;
+            }
+        } else if (type.getClass().equals(planet.getClass())) {
+
+            planet = new Planet();
+            Planet planet2 = gson.fromJson(jsonStr, Planet.class);
+            List<Planet> listPlanets = (List<Planet>) getAllPage(planet.getUrl(), planet);
+            for (Planet planetTemp : listPlanets) {
+                if (planetTemp.equals(planet2))
+                    return (T) planetTemp;
+            }
+
+        } else if (type.getClass().equals(species.getClass())) {
+            species = new Species();
+            Species species2 = gson.fromJson(jsonStr, Species.class);
+            List<Species> listSpecies = (List<Species>) getAllPage(species.getUrl(), species);
+            for (Species speciesTemp : listSpecies) {
+                if (speciesTemp.equals(species2))
+                    return (T) speciesTemp;
+            }
+        } else if (type.getClass().equals(starship.getClass())) {
+
+            starship = new Starship();
+            Starship starship2 = gson.fromJson(jsonStr, Starship.class);
+            List<Starship> liststarship = (List<Starship>) getAllPage(starship.getUrl(), starship);
+            for (Starship starshipTemp : liststarship) {
+                if (starshipTemp.equals(starship2))
+                    return (T) starshipTemp;
+            }
+        } else if (type.getClass().equals(vehicles.getClass())) {
+
+            vehicles = new Vehicles();
+            Vehicles vehicles2 = gson.fromJson(jsonStr, Vehicles.class);
+            List<Vehicles> listsVehicles = (List<Vehicles>) getAllPage(vehicles.getUrl(), vehicles);
+            for (Vehicles vehiclesTemp : listsVehicles) {
+                if (vehiclesTemp.equals(vehicles2))
+                    return (T) vehiclesTemp;
+            }
         }
-        return null;
+      throw new NullPointerException("Json не найден");
     }
 }
-
