@@ -14,7 +14,7 @@ public class TestGenericMethods {
 
     @Test
     public void getAllPageTest() throws UnirestException {
-        testMethods.getAllPage();
+      //
     }
 
     @Test

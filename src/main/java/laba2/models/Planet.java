@@ -6,7 +6,7 @@ import com.mashape.unirest.http.JsonNode;
 import java.util.List;
 import java.util.Objects;
 
-public class Planet  {
+public class Planet implements Model {
     private String name;
     private String rotation_period;
     private String orbital_period;
@@ -19,15 +19,16 @@ public class Planet  {
     private List<String> films;
     private String created;
     private String edited;
-    private String url ="https://swapi.co/api/planets/";
+    private String url = "https://swapi.co/api/planets/?page=1";
     private HttpResponse<JsonNode> response;
     private List<Planet> results;
 
+    @Override
     public List<Planet> getResults() {
         return results;
     }
-
-    public void setResults(List<Planet> results) {
+    @Override
+    public void setResults(List results) {
         this.results = results;
     }
 

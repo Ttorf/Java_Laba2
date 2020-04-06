@@ -6,7 +6,7 @@ import com.mashape.unirest.http.JsonNode;
 import java.util.List;
 import java.util.Objects;
 
-public class Films {
+public class Films implements Model {
     private String title;
     private int episode_id;
     private String opening_crawl;
@@ -20,15 +20,17 @@ public class Films {
     private List<Films> results;
     private String created;
     private String edited;
-    private String url = "https://swapi.co/api/films/";
+    private String url = "https://swapi.co/api/films/?page=1";
     private HttpResponse<JsonNode> response;
 
+    @Override
     public List<Films> getResults() {
         return results;
     }
 
-    public void setResults(List<Films> results) {
-        this.results = results;
+    @Override
+    public void setResults(List results) {
+        this.results =results;
     }
 
 

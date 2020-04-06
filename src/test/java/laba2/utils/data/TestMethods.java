@@ -9,25 +9,24 @@ import laba2.models.Starship;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.util.List;
+
 
 public class TestMethods {
     DataTest dataTest = new DataTest();
 
     public void getByUrl() throws UnirestException {
-        Starship starship1 = (Starship) dataTest.clientImplementation.getByUrl(dataTest.url2starships, dataTest.starship);
+        Starship starship1 = (Starship) dataTest.clientImplementation.getByUrl(dataTest.url2starships, Starship.class);
         checkStringValues(dataTest.nameStarhips, starship1.getName());
     }
 
-    public void getAllPage() throws UnirestException {
-        int size = 10;
-        dataTest.planetList = dataTest.clientImplementation.getAllPage(dataTest.planet.getUrl(), dataTest.planet);
-        checkNumValues(size, dataTest.planetList.size());
-    }
+
 
     public void getOnePage() throws UnirestException {
         String name = "Luke Skywalker";
-        People people3 = (People) dataTest.clientImplementation.getOnePage(dataTest.jsPeople, dataTest.people);
-        checkStringValues(name, people3.getName());
+
+
+        checkStringValues(name, "23");
     }
 
     public void getFilmByTitle() throws UnirestException {
@@ -39,7 +38,7 @@ public class TestMethods {
 
     public void getFilmByIDt() throws UnirestException {
         int id = 4;
-        String expectedName = "A New Hope";
+        String expectedName = "Return of the Jedi";
         Films films4 = dataTest.clientImplementation.getFilmByID(id);
         checkStringValues(expectedName, films4.getTitle());
 
@@ -60,16 +59,16 @@ public class TestMethods {
 
 
     public void getPeopleByID() throws UnirestException {
-        String expectedName = "Obi-Wan Kenobi";
-        int id = 9;
+        String expectedName = "Gasgano";
+        int id = 45;
         dataTest.people = dataTest.clientImplementation.getPeopleByID(id);
         checkStringValues(expectedName, dataTest.people.getName());
     }
 
 
     public void getAllPeople() throws UnirestException {
-        int excpectedSize = 10;
-        dataTest.peopleList = dataTest.clientImplementation.getAllPeople();
+        int excpectedSize = 87;
+        dataTest.peopleList = dataTest.clientImplementation.getAllPeople("https://swapi.co/api/people/?page=1");
         checkNumValues(excpectedSize, dataTest.peopleList.size());
 
     }
@@ -88,7 +87,7 @@ public class TestMethods {
 
 
     public void getAllPlanets() throws UnirestException {
-        int expectedSize = 10;
+        int expectedSize = 61;
         dataTest.planetList = dataTest.clientImplementation.getAllPlanets();
         checkNumValues(expectedSize, dataTest.planetList.size());
     }
@@ -151,7 +150,7 @@ public class TestMethods {
 
     public void getAllVehicles() throws UnirestException {
         int expectedSize = 10;
-        dataTest.vechiclesList = dataTest.clientImplementation.getAllVehicles();
+      //  dataTest.vechiclesList = dataTest.clientImplementation.getAllVehicles();
         checkNumValues(expectedSize, dataTest.vechiclesList.size());
 
     }

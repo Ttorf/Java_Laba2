@@ -1,38 +1,40 @@
 package laba2.utils;
 
 import com.mashape.unirest.http.exceptions.UnirestException;
+import laba2.models.*;
+
+import java.util.List;
 
 public interface Client<T> {
-    T getPeopleByName(String name) throws UnirestException;
+    People getPeopleByName(String name) throws UnirestException;
 
-    T getPeopleByID(int id) throws UnirestException;
+    People getPeopleByID(int id) throws UnirestException;
 
-    T getAllPeople() throws UnirestException;
+    List<People> getAllPeople(String url) throws UnirestException;
 
-    T getPlanetByName(String name) throws UnirestException;
+    Planet getPlanetByName(String name) throws UnirestException;
 
-    T getPlanetByID(int id) throws UnirestException;
+    Planet getPlanetByID(int id) throws UnirestException;
 
-    T getAllPlanets() throws UnirestException;
+    List<Planet> getAllPlanets() throws UnirestException;
 
-    T getFilmByTitle(String title) throws UnirestException;
+    Films getFilmByTitle(String title) throws UnirestException;
 
-    T getFilmByID(int id) throws UnirestException;
+    Films getFilmByID(int id) throws UnirestException;
 
-    T getAllFilms() throws UnirestException;
+    List<Films> getAllFilms() throws UnirestException;
 
-    T getSpeciesByName(String name) throws UnirestException;
+    Species getSpeciesByName(String name) throws UnirestException;
 
-    T getSpeciesByID(int id) throws UnirestException;
+    Species getSpeciesByID(int id) throws UnirestException;
 
+    List<Species> getAllSpecies() throws UnirestException;
 
-    T getAllSpecies() throws UnirestException;
+    Vehicles getVehicleByName(String name) throws UnirestException;
 
-    T getVehicleByName(String name) throws UnirestException;
+    Vehicles getVehicleByID(int id) throws UnirestException;
 
-    T getVehicleByID(int id) throws UnirestException;
-
-    T getAllVehicles() throws UnirestException;
+    List<Vehicles> getAllVehicles() throws UnirestException;
 
     T getStarshipByName(String name) throws UnirestException;
 

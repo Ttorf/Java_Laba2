@@ -6,7 +6,7 @@ import com.mashape.unirest.http.JsonNode;
 import java.util.List;
 import java.util.Objects;
 
-public class People {
+public class People implements Model {
     private String name;
     private String height;
     private String mass;
@@ -23,7 +23,7 @@ public class People {
     private List<People> results;
     private String created;
     private String edited;
-    private String url = "https://swapi.co/api/people/";
+    private String url = "https://swapi.co/api/people/?page=1";
     private HttpResponse<JsonNode> response;
 
     public String getName() {
@@ -129,12 +129,12 @@ public class People {
     public void setStarships(List<String> starships) {
         this.starships = starships;
     }
-
+@Override
     public List<People> getResults() {
         return results;
     }
-
-    public void setResults(List<People> results) {
+    @Override
+    public void setResults(List results) {
         this.results = results;
     }
 
@@ -163,10 +163,6 @@ public class People {
         return response;
     }
 
-
-    public void setResponse(HttpResponse<JsonNode> response) {
-        this.response = response;
-    }
 
     @Override
     public String toString() {
