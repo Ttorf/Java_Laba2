@@ -30,6 +30,7 @@ public class Vehicles implements Model {
     public List<Vehicles> getResults() {
         return results;
     }
+
     @Override
     public void setResults(List results) {
         this.results = results;
@@ -155,6 +156,7 @@ public class Vehicles implements Model {
         this.edited = edited;
     }
 
+    @Override
     public String getUrl() {
         return url;
     }

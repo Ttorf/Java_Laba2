@@ -1,21 +1,20 @@
 package laba2.utils;
 
 import com.google.gson.Gson;
+import com.mashape.unirest.http.HttpResponse;
+import com.mashape.unirest.http.JsonNode;
+import com.mashape.unirest.http.Unirest;
 import com.mashape.unirest.http.exceptions.UnirestException;
 import laba2.models.*;
 import laba2.models.People;
 
-import java.lang.reflect.Type;
+
 import java.util.ArrayList;
 import java.util.List;
 
 
 public class ClientImplementation implements Client {
     People people = new People();
-
-    List<Planet> planetList = new ArrayList<>();
-    List<Films> filmsList = new ArrayList<>();
-    People p = new People();
     Films films = new Films();
     Planet planet = new Planet();
     Species species = new Species();
@@ -25,32 +24,30 @@ public class ClientImplementation implements Client {
     Gson gson = new Gson();
     String json;
     StringBuilder nextUrl;
-    boolean tempboolean = false;
 
 
     @Override
     public People getPeopleByName(String name) throws UnirestException {
-        List<People> peopleList = getAllPeople(people.getUrl());
+        List<People> peopleList = getAllPeople();
         for (People per : peopleList) {
             if (per.getName().equals(name)) {
                 return per;
             }
         }
         throw new NullPointerException("Имя не найдено");
-
     }
 
     @Override
     public People getPeopleByID(int id) throws UnirestException {
 
-        List<People> peopleList = getAllPeople(people.getUrl());
+        List<People> peopleList = getAllPeople();
         if (!peopleList.isEmpty()) {
             return peopleList.get(id);
         } else throw new NullPointerException("Человек не найден");
     }
 
     @Override
-    public List<People> getAllPeople(String url) throws UnirestException {
+    public List<People> getAllPeople() throws UnirestException {
 
         List<People> peopleList = new ArrayList<>();
         peopleList.addAll(getAllPage(people.getUrl(), People.class));
@@ -60,7 +57,7 @@ public class ClientImplementation implements Client {
 
     @Override
     public Planet getPlanetByName(String name) throws UnirestException {
-        planetList = getAllPlanets();
+        List<Planet> planetList = getAllPlanets();
         for (Planet planet : planetList) {
             if (planet.getName().equals(name)) {
                 return planet;
@@ -71,24 +68,24 @@ public class ClientImplementation implements Client {
 
     @Override
     public Planet getPlanetByID(int id) throws UnirestException {
-        planetList = getAllPlanets();
+        List<Planet> planetList = getAllPlanets();
         if (!planetList.isEmpty()) {
             return planetList.get(id);
-        } else throw new NullPointerException("Человек не найден");
+        } else throw new NullPointerException("Планета не найдена");
     }
 
     @Override
     public List<Planet> getAllPlanets() throws UnirestException {
-        Model planet2 = new People();
-        List<Planet> planetlist;
-        //   planetlist = getAllPage(planet.getUrl(), Planet.class);
-        //    planet.setResults(planetlist);
+
+        List<Planet> planetList = new ArrayList<>();
+        planetList.addAll(getAllPage(planet.getUrl(), Planet.class));
+        planet.setResults(planetList);
         return planet.getResults();
     }
 
     @Override
     public Films getFilmByTitle(String title) throws UnirestException {
-        filmsList = getAllFilms();
+        List<Films> filmsList = getAllFilms();
         for (Films films1 : filmsList) {
             if (films1.getTitle().equals(title)) {
                 return films1;
@@ -101,120 +98,119 @@ public class ClientImplementation implements Client {
     @Override
     public Films getFilmByID(int id) throws UnirestException {
 
-        filmsList = getAllFilms();
+        List<Films> filmsList = getAllFilms();
         if (!filmsList.isEmpty()) {
-            return filmsList.get(id);
+            for (Films films1 : filmsList) {
+                if (films1.getEpisode_id() == id) {
+                    return films1;
+                }
+            }
+            return null;
         } else throw new NullPointerException("Фильм не найден");
     }
 
     @Override
     public List<Films> getAllFilms() throws UnirestException {
-        Model film2 = new Films();
-        List<Films> filmslist1;
-        //  filmslist1 = getAllPage(films.getUrl(), film2);
-        //   films.setResults(filmslist1);
+        List<Films> filmsList = new ArrayList<>();
+        filmsList.addAll(getAllPage(films.getUrl(), Films.class));
+        films.setResults(filmsList);
         return films.getResults();
     }
 
     @Override
     public Species getSpeciesByName(String name) throws UnirestException {
-        json = workWithSite.jsonToString(species.getUrl());
-        species = gson.fromJson(json, Species.class);
-        for (Species speciestemp : species.getResults()) {
-            if (speciestemp.getName().equals(name)) {
-                return speciestemp;
+        List<Species> speciesList = getAllSpecies();
+        for (Species species1 : speciesList) {
+            if (species1.getName().equals(name)) {
+                return species1;
             }
         }
-        throw new NullPointerException("Разновидность не найдена");
+        throw new NullPointerException("Имя не найдено");
     }
 
     @Override
     public Species getSpeciesByID(int id) throws UnirestException {
-        json = workWithSite.jsonToString(species.getUrl());
-        species = gson.fromJson(json, Species.class);
-        if (!species.getResults().isEmpty()) {
-            return species.getResults().get(id);
-        } else throw new NullPointerException("Разновидность не найдена");
+        List<Species> speciesList = getAllSpecies();
+        if (!speciesList.isEmpty()) {
+            return speciesList.get(id);
+        } else throw new NullPointerException("Человек не найден");
     }
 
     @Override
     public List<Species> getAllSpecies() throws UnirestException {
-        json = workWithSite.jsonToString(species.getUrl());
-        species = gson.fromJson(json, Species.class);
+        List<Species> speciesList = new ArrayList<>();
+        speciesList.addAll(getAllPage(species.getUrl(), Species.class));
+        species.setResults(speciesList);
         return species.getResults();
     }
 
     @Override
     public Vehicles getVehicleByName(String name) throws UnirestException {
-        json = workWithSite.jsonToString(vehicles.getUrl());
-        vehicles = gson.fromJson(json, Vehicles.class);
-        for (Vehicles vehicles : vehicles.getResults()) {
-            if (vehicles.getName().equals(name)) {
-                return vehicles;
+        List<Vehicles> vehiclesList = getAllVehicles();
+        for (Vehicles vehicles1 : vehiclesList) {
+            if (vehicles1.getName().equals(name)) {
+                return vehicles1;
             }
         }
-        throw new NullPointerException("Техника не найдена");
+        throw new NullPointerException("Имя не найдено");
     }
 
     @Override
     public Vehicles getVehicleByID(int id) throws UnirestException {
-        json = workWithSite.jsonToString(vehicles.getUrl());
-        vehicles = gson.fromJson(json, Vehicles.class);
-        if (!vehicles.getResults().isEmpty()) {
-            return vehicles.getResults().get(id);
-        } else throw new NullPointerException("Техника не найдена");
+        List<Vehicles> vehiclesList = getAllVehicles();
+        if (!vehiclesList.isEmpty()) {
+            return vehiclesList.get(id);
+        } else throw new NullPointerException("Транспорт не найден");
     }
 
     @Override
     public List<Vehicles> getAllVehicles() throws UnirestException {
-        json = workWithSite.jsonToString(vehicles.getUrl());
-        vehicles = gson.fromJson(json, Vehicles.class);
+        List<Vehicles> vehiclesList = new ArrayList<>();
+        vehiclesList.addAll(getAllPage(vehicles.getUrl(), Vehicles.class));
+        vehicles.setResults(vehiclesList);
         return vehicles.getResults();
     }
 
     @Override
-    public Starship getStarshipByName(String name) throws UnirestException {
-        json = workWithSite.jsonToString(starship.getUrl());
-        starship = gson.fromJson(json, Starship.class);
-        for (Starship starship : starship.getResults()) {
-            if (starship.getName().equals(name)) {
-                return starship;
+    public Starship getStarShipByName(String name) throws UnirestException {
+        List<Starship> starshipList = getAllStarShips();
+        for (Starship starship1 : starshipList) {
+            if (starship1.getName().equals(name)) {
+                return starship1;
             }
         }
-        throw new NullPointerException("Корабль не найден");
+        throw new NullPointerException("Имя не найдено");
     }
 
     @Override
-    public Starship getStarshipByID(int id) throws UnirestException {
-        json = workWithSite.jsonToString(starship.getUrl());
-        starship = gson.fromJson(json, Starship.class);
-        if (!starship.getResults().isEmpty()) {
-            return starship.getResults().get(id);
-        } else return null;
+    public Starship getStarShipByID(int id) throws UnirestException {
+        List<Starship> starshipList = getAllStarShips();
+        if (!starshipList.isEmpty()) {
+            return starshipList.get(id);
+        } else throw new NullPointerException("Транспорт не найден");
     }
 
     @Override
-    public List<Starship> getAllStarships() throws UnirestException {
-        json = workWithSite.jsonToString(starship.getUrl());
-        starship = gson.fromJson(json, Starship.class);
+    public List<Starship> getAllStarShips() throws UnirestException {
+        List<Starship> starshipArrayList = new ArrayList<>();
+        starshipArrayList.addAll(getAllPage(starship.getUrl(), Starship.class));
+        starship.setResults(starshipArrayList);
         return starship.getResults();
     }
     //TODO
-
-    public <T extends Model> T getByUrl(String json, Class<T> type) throws UnirestException {
+    public <T extends Model> T getOnePage(String json, Class<T> type) throws UnirestException {
 
         return null;
-
     }
 
-    public <T extends Model> List<T> getAllPage(String url, Class<T> type) throws UnirestException {
+    private <T extends Model> List<T> getAllPage(String url, Class<T> type) throws UnirestException {
         List<T> listJsons = new ArrayList<>();
         nextUrl = new StringBuilder(url);
         int indexPage = convertUrltoNumberPage(String.valueOf(nextUrl));
         boolean hasNext = false;
 
         while (!hasNext) {
-            listJsons.addAll(getOnePageClass(type, String.valueOf(nextUrl)));
+            listJsons.addAll(getByUrl(type, String.valueOf(nextUrl)));
             json = workWithSite.jsonToString(String.valueOf(nextUrl));
             nextUrl.deleteCharAt(nextUrl.length() - 1);
             indexPage = indexPage + 1;
@@ -226,16 +222,12 @@ public class ClientImplementation implements Client {
 
         }
         return listJsons;
-
-
     }
-    //TODO
 
-    public <T extends Model> List<T> getOnePageClass(Class<T> type, String url) throws UnirestException {
+    private <T extends Model> List<T> getByUrl(Class<T> type, String url) throws UnirestException {
         String json = workWithSite.jsonToString(url);
         T result = gson.fromJson(json, type);
         return result.getResults();
-
     }
 
     private int convertUrltoNumberPage(String url) {

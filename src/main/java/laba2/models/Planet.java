@@ -27,6 +27,7 @@ public class Planet implements Model {
     public List<Planet> getResults() {
         return results;
     }
+
     @Override
     public void setResults(List results) {
         this.results = results;
@@ -128,6 +129,7 @@ public class Planet implements Model {
         this.edited = edited;
     }
 
+    @Override
     public String getUrl() {
         return url;
     }

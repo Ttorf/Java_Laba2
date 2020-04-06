@@ -129,10 +129,12 @@ public class People implements Model {
     public void setStarships(List<String> starships) {
         this.starships = starships;
     }
-@Override
+
+    @Override
     public List<People> getResults() {
         return results;
     }
+
     @Override
     public void setResults(List results) {
         this.results = results;
@@ -154,6 +156,7 @@ public class People implements Model {
         this.edited = edited;
     }
 
+    @Override
     public String getUrl() {
         return url;
     }

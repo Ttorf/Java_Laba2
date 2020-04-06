@@ -8,17 +8,17 @@ public class TestStarhip {
     TestMethods testMethods = new TestMethods();
 
     @Test
-    public void getStarshipByNameTest() throws UnirestException {
-        testMethods.getStarshipByName();
+    public void getStarShipByNameTest() throws UnirestException {
+        testMethods.getStarShipByName();
     }
 
     @Test
-    public void getStarshipByIDTest() throws UnirestException {
-        testMethods.getStarshipByID();
+    public void getStarShipByIDTest() throws UnirestException {
+        testMethods.getStarShipByID();
     }
 
     @Test
-    public void getAllStarshipsTest() throws UnirestException {
-        testMethods.getAllStarships();
+    public void getAllStarShipsTest() throws UnirestException {
+        testMethods.getAllStarShips();
     }
 }

@@ -10,7 +10,7 @@ public interface Client<T> {
 
     People getPeopleByID(int id) throws UnirestException;
 
-    List<People> getAllPeople(String url) throws UnirestException;
+    List<People> getAllPeople() throws UnirestException;
 
     Planet getPlanetByName(String name) throws UnirestException;
 
@@ -36,11 +36,11 @@ public interface Client<T> {
 
     List<Vehicles> getAllVehicles() throws UnirestException;
 
-    T getStarshipByName(String name) throws UnirestException;
+    T getStarShipByName(String name) throws UnirestException;
 
-    T getStarshipByID(int id) throws UnirestException;
+    T getStarShipByID(int id) throws UnirestException;
 
-    T getAllStarships() throws UnirestException;
+    T getAllStarShips() throws UnirestException;
 
 
 }

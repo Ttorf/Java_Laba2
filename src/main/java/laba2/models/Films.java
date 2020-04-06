@@ -30,7 +30,7 @@ public class Films implements Model {
 
     @Override
     public void setResults(List results) {
-        this.results =results;
+        this.results = results;
     }
 
 
@@ -139,6 +139,7 @@ public class Films implements Model {
         this.edited = edited;
     }
 
+    @Override
     public String getUrl() {
         return url;
     }

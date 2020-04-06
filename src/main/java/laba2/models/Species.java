@@ -30,6 +30,7 @@ public class Species implements Model {
     public List<Species> getResults() {
         return results;
     }
+
     @Override
     public void setResults(List results) {
         this.results = results;
@@ -147,6 +148,7 @@ public class Species implements Model {
         this.edited = edited;
     }
 
+    @Override
     public String getUrl() {
         return url;
     }

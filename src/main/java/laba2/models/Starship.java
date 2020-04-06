@@ -31,6 +31,7 @@ public class Starship implements Model {
     public List<Starship> getResults() {
         return results;
     }
+
     @Override
     public void setResults(List results) {
         this.results = results;
@@ -164,6 +165,7 @@ public class Starship implements Model {
         this.edited = edited;
     }
 
+    @Override
     public String getUrl() {
         return url;
     }
