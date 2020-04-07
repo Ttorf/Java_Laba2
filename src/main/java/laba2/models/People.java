@@ -24,7 +24,6 @@ public class People implements Model {
     private String created;
     private String edited;
     private String url = "https://swapi.co/api/people/?page=1";
-    private HttpResponse<JsonNode> response;
 
     public String getName() {
         return name;
@@ -162,9 +161,6 @@ public class People implements Model {
     }
 
 
-    public HttpResponse<JsonNode> getResponse() {
-        return response;
-    }
 
 
     @Override
@@ -187,7 +183,6 @@ public class People implements Model {
                 ", created='" + created + '\'' +
                 ", edited='" + edited + '\'' +
                 ", url='" + url + '\'' +
-                ", response=" + response +
                 '}';
     }
 
@@ -212,12 +207,11 @@ public class People implements Model {
                 Objects.equals(results, people.results) &&
                 Objects.equals(created, people.created) &&
                 Objects.equals(edited, people.edited) &&
-                Objects.equals(url, people.url) &&
-                Objects.equals(response, people.response);
+                Objects.equals(url, people.url);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, height, mass, hair_color, skin_color, eye_color, birth_year, gender, homeworld, films, species, vehicles, starships, results, created, edited, url, response);
+        return Objects.hash(name, height, mass, hair_color, skin_color, eye_color, birth_year, gender, homeworld, films, species, vehicles, starships, results, created, edited, url);
     }
 }

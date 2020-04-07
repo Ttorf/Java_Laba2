@@ -4,15 +4,11 @@ package laba2.utils.data;
 import com.mashape.unirest.http.exceptions.UnirestException;
 import laba2.models.*;
 import org.junit.Assert;
-import org.junit.Test;
-
-import java.util.List;
-
 
 public class TestMethods {
     DataTest dataTest = new DataTest();
 
-      public void getFilmByTitle() throws UnirestException {
+    public void getFilmByTitle() throws UnirestException {
         String title = "Attack of the Clones";
         Films films = dataTest.clientImplementation.getFilmByTitle(title);
         checkStringValues(title, films.getTitle());
@@ -133,8 +129,8 @@ public class TestMethods {
 
     public void getAllVehicles() throws UnirestException {
         int expectedSize = 39;
-       dataTest.vechiclesList = dataTest.clientImplementation.getAllVehicles();
-        checkNumValues(expectedSize,dataTest.vechiclesList.size());
+        dataTest.vechiclesList = dataTest.clientImplementation.getAllVehicles();
+        checkNumValues(expectedSize, dataTest.vechiclesList.size());
 
     }
 

@@ -130,7 +130,7 @@ public class ClientImplementation implements Client {
         List<Species> speciesList = getAllSpecies();
         if (!speciesList.isEmpty()) {
             return speciesList.get(id);
-        } else throw new NullPointerException("Человек не найден");
+        } else throw new NullPointerException("Species не найден");
     }
 
     @Override
@@ -184,7 +184,7 @@ public class ClientImplementation implements Client {
         List<Starship> starshipList = getAllStarShips();
         if (!starshipList.isEmpty()) {
             return starshipList.get(id);
-        } else throw new NullPointerException("Транспорт не найден");
+        } else throw new NullPointerException("Корабль не найден");
     }
 
     @Override
@@ -203,7 +203,7 @@ public class ClientImplementation implements Client {
     private <T extends Model> List<T> getAllPage(String url, Class<T> type) throws UnirestException {
         List<T> listJsons = new ArrayList<>();
         nextUrl = new StringBuilder(url);
-        int indexPage = convertUrltoNumberPage(String.valueOf(nextUrl));
+        int indexPage = convertUrlToNumberPage(String.valueOf(nextUrl));
         boolean hasNext = false;
 
         while (!hasNext) {
@@ -227,7 +227,7 @@ public class ClientImplementation implements Client {
         return result.getResults();
     }
 
-    private int convertUrltoNumberPage(String url) {
+    private int convertUrlToNumberPage(String url) {
         String str = String.valueOf(url.charAt(url.length() - 1));
         int page = Integer.parseInt(str);
         return page;
