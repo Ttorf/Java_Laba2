@@ -37,10 +37,13 @@ public class ClientImplementation implements Client {
     @Override
     public People getPeopleByID(int id) throws UnirestException {
 
-        List<People> peopleList = getAllPeople();
-        if (!peopleList.isEmpty()) {
-            return peopleList.get(id);
-        } else throw new NullPointerException("Человек не найден");
+        String newUrl = changeIdInUrl(people.getUrlId(), id);
+        People people1 = getOnePage(newUrl, People.class);
+        if (people1.getName() == null) {
+            throw new NullPointerException("объект не найден");
+        } else {
+            return people1;
+        }
     }
 
     @Override
@@ -65,10 +68,13 @@ public class ClientImplementation implements Client {
 
     @Override
     public Planet getPlanetByID(int id) throws UnirestException {
-        List<Planet> planetList = getAllPlanets();
-        if (!planetList.isEmpty()) {
-            return planetList.get(id);
-        } else throw new NullPointerException("Планета не найдена");
+        String newUrl = changeIdInUrl(planet.getUrlId(), id);
+        Planet planet1 = getOnePage(newUrl,Planet.class);
+        if (planet1.getName() == null) {
+            throw new NullPointerException("объект не найден");
+        } else {
+            return planet1;
+        }
     }
 
     @Override
@@ -127,10 +133,13 @@ public class ClientImplementation implements Client {
 
     @Override
     public Species getSpeciesByID(int id) throws UnirestException {
-        List<Species> speciesList = getAllSpecies();
-        if (!speciesList.isEmpty()) {
-            return speciesList.get(id);
-        } else throw new NullPointerException("Species не найден");
+        String newUrl = changeIdInUrl(species.getUrlId(), id);
+        Species species1 = getOnePage(newUrl, Species.class);
+        if (species1.getName() == null) {
+            throw new NullPointerException("объект не найден");
+        } else {
+            return species1;
+        }
     }
 
     @Override
@@ -154,10 +163,17 @@ public class ClientImplementation implements Client {
 
     @Override
     public Vehicles getVehicleByID(int id) throws UnirestException {
-        List<Vehicles> vehiclesList = getAllVehicles();
-        if (!vehiclesList.isEmpty()) {
-            return vehiclesList.get(id);
-        } else throw new NullPointerException("Транспорт не найден");
+
+        String newUrl = changeIdInUrl(vehicles.getUrlId(), id);
+
+
+        Vehicles vehicles1 = getOnePage(newUrl, Vehicles.class);
+        if (vehicles1.getName() == null) {
+            throw new NullPointerException("объект не найден");
+        } else {
+            return vehicles1;
+        }
+
     }
 
     @Override
@@ -194,16 +210,19 @@ public class ClientImplementation implements Client {
         starship.setResults(starshipArrayList);
         return starship.getResults();
     }
-    //TODO
-    public <T extends Model> T getOnePage(String json, Class<T> type) throws UnirestException {
 
-        return null;
+    //TODO
+    public <T extends Item> T getOnePage(String url, Class<T> type) throws UnirestException {
+
+        String json = workWithSite.jsonToString(url);
+        T result = gson.fromJson(json, type);
+        return result;
     }
 
-    private <T extends Model> List<T> getAllPage(String url, Class<T> type) throws UnirestException {
+    private <T extends Item> List<T> getAllPage(String url, Class<T> type) throws UnirestException {
         List<T> listJsons = new ArrayList<>();
         nextUrl = new StringBuilder(url);
-        int indexPage = convertUrlToNumberPage(String.valueOf(nextUrl));
+        int indexPage = convertUrlToNumberPage(String.valueOf(nextUrl), 1);
         boolean hasNext = false;
 
         while (!hasNext) {
@@ -213,23 +232,29 @@ public class ClientImplementation implements Client {
             indexPage = indexPage + 1;
             nextUrl.append(indexPage);
 
-            if (workWithSite.nextPage(json)) {
+            if (workWithSite.checkJsonTypeIsNull(json, "next")) {
                 hasNext = true;
             }
-
         }
         return listJsons;
     }
 
-    private <T extends Model> List<T> getByUrl(Class<T> type, String url) throws UnirestException {
+    private <T extends Item> List<T> getByUrl(Class<T> type, String url) throws UnirestException {
         String json = workWithSite.jsonToString(url);
         T result = gson.fromJson(json, type);
         return result.getResults();
     }
 
-    private int convertUrlToNumberPage(String url) {
-        String str = String.valueOf(url.charAt(url.length() - 1));
+    private int convertUrlToNumberPage(String url, int numberOfCharacters) {
+        String str = String.valueOf(url.charAt(url.length() - numberOfCharacters));
         int page = Integer.parseInt(str);
         return page;
     }
+
+    private String changeIdInUrl(String url, int id) {
+        StringBuilder stringBuilder = new StringBuilder(url);
+        stringBuilder.append(id);
+        return String.valueOf(stringBuilder);
+    }
+
 }

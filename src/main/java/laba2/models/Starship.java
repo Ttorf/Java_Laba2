@@ -6,7 +6,7 @@ import com.mashape.unirest.http.JsonNode;
 import java.util.List;
 import java.util.Objects;
 
-public class Starship implements Model {
+public class Starship implements Item {
     private String name;
     private String model;
     private String manufacturer;
@@ -24,8 +24,14 @@ public class Starship implements Model {
     private String created;
     private String edited;
     private String url = "https://swapi.co/api/starships/?page=1";
+    private String urlId ="https://swapi.co/api/starships/";
     private HttpResponse<JsonNode> response;
     private List<Starship> results;
+
+    @Override
+    public String getUrlId() {
+        return urlId;
+    }
 
     @Override
     public List<Starship> getResults() {

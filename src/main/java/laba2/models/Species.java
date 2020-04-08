@@ -6,7 +6,7 @@ import com.mashape.unirest.http.JsonNode;
 import java.util.List;
 import java.util.Objects;
 
-public class Species implements Model {
+public class Species implements Item {
     private String name;
     private String classification;
     private String designation;
@@ -22,9 +22,14 @@ public class Species implements Model {
     private String created;
     private String edited;
     private String url = "https://swapi.co/api/species/?page=1";
-    ;
+    private String urlId = "https://swapi.co/api/species/";
     private HttpResponse<JsonNode> response;
     private List<Species> results;
+
+    @Override
+    public String getUrlId() {
+        return urlId;
+    }
 
     @Override
     public List<Species> getResults() {

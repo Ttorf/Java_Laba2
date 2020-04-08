@@ -6,7 +6,7 @@ import com.mashape.unirest.http.JsonNode;
 import java.util.List;
 import java.util.Objects;
 
-public class Vehicles implements Model {
+public class Vehicles implements Item {
     private String name;
     private String model;
     private String manufacturer;
@@ -23,6 +23,7 @@ public class Vehicles implements Model {
     private String created;
     private String edited;
     private String url = "https://swapi.co/api/vehicles/?page=1";
+    private String urlId ="https://swapi.co/api/vehicles/";
     private HttpResponse<JsonNode> response;
     private List<Vehicles> results;
 
@@ -82,6 +83,10 @@ public class Vehicles implements Model {
 
     public void setMax_atmosphering_speed(String max_atmosphering_speed) {
         this.max_atmosphering_speed = max_atmosphering_speed;
+    }
+@Override
+    public String getUrlId() {
+        return urlId;
     }
 
     public String getCrew() {

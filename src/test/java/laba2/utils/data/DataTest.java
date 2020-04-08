@@ -9,11 +9,11 @@ import java.util.List;
 public class DataTest {
     ClientImplementation clientImplementation = new ClientImplementation();
     String nameVehicles = "Snowspeeder";
-    String nameVehicles2 = "X-34 landspeeder";
+    String nameVehicles2 = "T-16 skyhopper";
     String  expectedNameStarship = "Millennium Falcon";
     String nameStarship = "Sentinel-class landing craft";
     String nameSpecies = "Mon Calamari";
-    String nameSpecies2 = "Trandoshan";
+    String nameSpecies2 = "Droid";
     String excectedCollorEya = "yellow";
     String expectedNamePlanet = "Hoth";
     String namePeople = "Leia Organa";

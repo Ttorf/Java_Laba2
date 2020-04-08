@@ -1,12 +1,9 @@
 package laba2.models;
 
-import com.mashape.unirest.http.HttpResponse;
-import com.mashape.unirest.http.JsonNode;
-
 import java.util.List;
 import java.util.Objects;
 
-public class People implements Model {
+public class People implements Item {
     private String name;
     private String height;
     private String mass;
@@ -24,6 +21,12 @@ public class People implements Model {
     private String created;
     private String edited;
     private String url = "https://swapi.co/api/people/?page=1";
+    private String urlId = "https://swapi.co/api/people/";
+
+    @Override
+    public String getUrlId() {
+        return urlId;
+    }
 
     public String getName() {
         return name;
@@ -159,8 +162,6 @@ public class People implements Model {
     public String getUrl() {
         return url;
     }
-
-
 
 
     @Override

@@ -38,7 +38,7 @@ public class TestMethods {
 
 
     public void getPeopleByID() throws UnirestException {
-        String expectedName = "Gasgano";
+        String expectedName = "Bib Fortuna";
         int id = 45;
         dataTest.people = dataTest.clientImplementation.getPeopleByID(id);
         checkStringValues(expectedName, dataTest.people.getName());
@@ -59,7 +59,7 @@ public class TestMethods {
 
 
     public void getPlanetByID() throws UnirestException {
-        int id = 2;
+        int id = 4;
         dataTest.planet = dataTest.clientImplementation.getPlanetByID(id);
         checkStringValues(dataTest.expectedNamePlanet, dataTest.planet.getName());
     }
@@ -120,7 +120,7 @@ public class TestMethods {
 
 
     public void getVehicleByID() throws UnirestException {
-        int id = 2;
+        int id = 6;
         dataTest.vehicles = dataTest.clientImplementation.getVehicleByID(id);
         checkStringValues(dataTest.nameVehicles2, dataTest.vehicles.getName());
 

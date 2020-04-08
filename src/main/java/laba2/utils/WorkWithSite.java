@@ -10,7 +10,7 @@ import com.mashape.unirest.http.exceptions.UnirestException;
 
 
 public class WorkWithSite {
-    //TODO
+
     HttpResponse<JsonNode> response;
 
     public void setResponse(HttpResponse<JsonNode> response) {
@@ -22,18 +22,18 @@ public class WorkWithSite {
         return response.getBody().toString();
     }
 
-
     public JsonObject getJsonObjectParse(String jsonString) {
         JsonElement jsonElementParse = new JsonParser().parse(jsonString);
         return jsonElementParse.getAsJsonObject();
     }
 
-    public boolean nextPage(String jsonString) {
+    public boolean checkJsonTypeIsNull(String jsonString,String targetWord) {
         JsonObject jsonObjectParse = getJsonObjectParse(jsonString);
-        if (jsonObjectParse.get("next").isJsonNull()) {
+        if (jsonObjectParse.get(targetWord).isJsonNull()) {
             return true;
         }
         return false;
     }
+
 
 }
