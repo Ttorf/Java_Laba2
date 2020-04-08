@@ -69,7 +69,7 @@ public class ClientImplementation implements Client {
     @Override
     public Planet getPlanetByID(int id) throws UnirestException {
         String newUrl = changeIdInUrl(planet.getUrlId(), id);
-        Planet planet1 = getOnePage(newUrl,Planet.class);
+        Planet planet1 = getOnePage(newUrl, Planet.class);
         if (planet1.getName() == null) {
             throw new NullPointerException("объект не найден");
         } else {
