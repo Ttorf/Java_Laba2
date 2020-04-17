@@ -10,7 +10,7 @@ public class DataTest {
     ClientImplementation clientImplementation = new ClientImplementation();
     String nameVehicles = "Snowspeeder";
     String nameVehicles2 = "T-16 skyhopper";
-    String  expectedNameStarship = "Millennium Falcon";
+    String expectedNameStarship = "Millennium Falcon";
     String nameStarship = "Sentinel-class landing craft";
     String nameSpecies = "Mon Calamari";
     String nameSpecies2 = "Droid";

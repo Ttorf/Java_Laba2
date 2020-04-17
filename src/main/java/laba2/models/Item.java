@@ -9,5 +9,5 @@ public interface Item<T> {
 
     String getUrl();
 
-    public String getUrlId();
+     String getUrlId();
 }

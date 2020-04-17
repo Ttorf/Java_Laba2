@@ -140,18 +140,18 @@ public class Lesson4 {
     }
 
     public static void main(String[] args) throws UnirestException {
-        String json = Json();
+        String json = json();
         Gson gson = new Gson();
 
         Lesson4 item;
 
         item = gson.fromJson(json, Lesson4.class);
         String name2 = item.getSkinCollor();
-        System.out.println(Json());
+        System.out.println(json());
 
     }
 
-    public static String Json() throws UnirestException {
+    public static String json() throws UnirestException {
         Lesson4 lesson4 = new Lesson4();
         lesson4.response = Unirest.get(lesson4.url).asJson();
         return lesson4.response.getBody().toString();
