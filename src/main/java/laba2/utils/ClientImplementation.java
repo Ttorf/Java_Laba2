@@ -211,7 +211,6 @@ public class ClientImplementation implements Client {
         return starship.getResults();
     }
 
-    //TODO
     public <T extends Item> T getOnePage(String url, Class<T> type) throws UnirestException {
 
         String json = workWithSite.jsonToString(url);
